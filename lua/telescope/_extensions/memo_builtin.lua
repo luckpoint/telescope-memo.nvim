@@ -34,11 +34,15 @@ local function gen_from_memo(opts)
 
   return function(line)
     local fields = vim.split(line, sep, true)
+    -- ファイル名から年を取り出し、フォルダパスの調整を行う
+    -- 汎用的に変更したい
+    local year = string.sub(fields[1], 1, 4)
+
     return {
       display = make_display,
       filename = fields[1],
       ordinal = fields[1],
-      path = opts.memo_dir..Path.path.sep..fields[1],
+      path = opts.memo_dir .. Path.path.sep .. year .. Path.path.sep .. fields[1],
       title = fields[2],
       value = fields[1],
     }
